@@ -12,13 +12,11 @@ addToThis.call(obj1,3)
 
 */
 
-let addToThis = function(a, b, c){
-  console.log(this.num + a+ b+c);
+let addToThis = function (a, b, c) {
+  //   console.log(this.num + a+ b+c);
+  return this.num + a + b + c;
 };
 
-
 // Apply
-let arr = [1,2,3]
-addToThis.apply(obj1, arr);
-
-
+let arr = [1, 2, 3];
+console.log(addToThis.apply(obj1, arr));
