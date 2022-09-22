@@ -31,6 +31,7 @@ console.log(newarr);
 */
 
 // destructuring 
+// RULE :- data type on bs needs to be same 
 /*//arrays
 const user = ["yatharth",1024,"dev"]
 let [Name,Num,role] = user;
@@ -38,6 +39,7 @@ console.log(`user =>${Name} role => ${role}`)
 */
 
 //objects
+/*
 const user ={
     name:'yatharth',
     num:1024,
@@ -53,5 +55,5 @@ const user ={
 const {num , role,name} = user
 
 console.log(`user =>${name} role => ${role}`)
-
+*/
 
