@@ -32,7 +32,33 @@ reasons :- console.log() of 'a' 'b' 'd' are in global scope so they are exicuted
 
 */
 
+/*
+var a = [1, 2, 3];
+// create own map
+Array.prototype.myMap =  (fun)=> {
+  let n = this.length; // length of Array
+  console.log(this.a);
+  let newArr = [];
 
+  for (let i = 0; i < n; i++) {
+    let element = this[i]; //element at index i
+
+    let ans = fun(element); //  calling function with element
+
+    if (ans) newArr[i] = ans;
+    else newArr[i] = element;
+  }
+
+  return newArr;
+};
+
+// a.myMap((item) => console.log(item + 1));
+
+let a2 = a.myMap((item) => item * 10);
+
+console.log(a2);
+
+*/
 
 
 
