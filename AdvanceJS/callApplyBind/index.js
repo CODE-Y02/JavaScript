@@ -50,26 +50,28 @@ function print() {
 let printAge = print.bind(student);
 printAge();
 
-
 //Understand currying
-let multiply = function(x,y){
-    console.log(x*y);
-}
+let multiply = function (x, y) {
+  console.log(x * y);
+};
 
-let multiplyByTwo = multiply.bind(this,2) 
+let multiplyByTwo = multiply.bind(this, 2);
 /*
 in multiplyByTwo we are setting x value permanently as x =2;
 */
-multiplyByTwo(5)  // 50== y in function
+multiplyByTwo(5); // 50== y in function
 
-
-let multiplyByThree = multiply.bind(this,3) 
-multiplyByThree(5) 
+let multiplyByThree = multiply.bind(this, 3);
+multiplyByThree(5);
 
 //creating more than 1 fun from one fun of similar type
 
+//  doing same thing using closure
+let mul = function (x) {
+  return function (y) {
+    console.log(x * y);
+  }
+};
 
-
-
-
-
+let mulBy2 = mul(2)
+mulBy2(500)
