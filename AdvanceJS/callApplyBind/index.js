@@ -1,34 +1,20 @@
-// Call
-let obj1 = {
-  num: 2,
-};
-// let obj2= {
-//   num: 15,
-// };
+// syntax of call apply bind
 /*
-
-let addToThis = function(a){
-    console.log(this.num + a)
-}
-
-addToThis.call(obj1,3)
-
-*/
-
-let addToThis = function (a, b, c) {
-  //   console.log(this.num + a+ b+c);
-  return this.num + a + b + c;
+let obj = {
+  key: "val",
 };
 
-// Apply
-/*
-let arr = [1, 2, 3];
-console.log(addToThis.apply(obj1, arr));
-console.log(addToThis.apply(obj2, arr));
+let functionName = function (arg1, arg2, arg3) {};
+
+//call
+functionName.call(obj, arg1, arg2, arg3);
+
+//apply
+functionName.apply(obj, [arg1, arg2, arg3]);
+
+//bind
+let bound = functionName.bind(obj);
+bound(arg1, arg2, arg3);
 */
 
-// BIND
-let arr = [1, 2, 3];
-let bound = addToThis.bind(obj1);
-console.dir(bound);
-console.log(bound(1,2,3));
+//  NOTE :- THIS MAY CREATE PLOBLEM WITH ARROW FUNCTION
