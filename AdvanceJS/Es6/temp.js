@@ -1,9 +1,9 @@
 function x() {
   for(var i=1;i<6;i++){
-    function close(i) {
+    function close(n) {
       setTimeout(()=>{
-        console.log(i);
-      },i*1000)
+        console.log(n);
+      },n*1000)
     }
     close(i)
   }
