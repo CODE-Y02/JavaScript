@@ -5,7 +5,6 @@ function x() {
         console.log(i);
       },i*1000)
     }
-
     close(i)
   }
 }
