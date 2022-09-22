@@ -31,7 +31,27 @@ console.log(newarr);
 */
 
 // destructuring 
-
+/*//arrays
 const user = ["yatharth",1024,"dev"]
 let [Name,Num,role] = user;
 console.log(`user =>${Name} role => ${role}`)
+*/
+
+//objects
+const user ={
+    name:'yatharth',
+    num:1024,
+    role:'DEV'
+}
+
+// TRY THIS FIRST 
+// const {Name,num , role} = user
+// console.log(`user =>${Name} role => ${role}`)
+// Name and name in object doesnt match 
+// for objects variable name needs to samme as keys in obj
+
+const {num , role,name} = user
+
+console.log(`user =>${name} role => ${role}`)
+
+
