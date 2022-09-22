@@ -27,7 +27,8 @@ console.log(addToThis.apply(obj1, arr));
 console.log(addToThis.apply(obj2, arr));
 */
 
-// BIND 
+// BIND
 let arr = [1, 2, 3];
-console.log(addToThis.bind(obj1, arr))  // add function to object and return function
-
+let bound = addToThis.bind(obj1);
+console.dir(bound);
+console.log(bound(1,2,3));
