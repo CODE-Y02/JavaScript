@@ -17,8 +17,10 @@ let myArr = [5, 1];
 console.log(sumOne(...myArr)); // spread
 
 // rest operator
+// it do exactly opposite of spread 
 let sumAll = (...args) => {
   // when we have ... kind of statement in function assume we are getting array
+  console.log(args)
   let sum = 0;
   for (const arg of args) {
     sum += arg;
