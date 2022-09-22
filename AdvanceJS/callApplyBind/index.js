@@ -66,7 +66,7 @@ multiplyByTwo(5)  // 50== y in function
 let multiplyByThree = multiply.bind(this,3) 
 multiplyByThree(5) 
 
-
+//creating more than 1 fun from one fun of similar type
 
 
 
