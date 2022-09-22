@@ -12,7 +12,7 @@
 */
 
 // rest operator and spread combo
-
+/*
 let sumAll = (a, b, ...args) => {
   let mul = a * b;
   console.log(args);
@@ -28,3 +28,10 @@ let a = [1, 5, 7];
 let b = [7, "a"];
 let newarr = [...a, ...b];
 console.log(newarr);
+*/
+
+// destructuring 
+
+const user = ["yatharth",1024,"dev"]
+let [Name,Num,role] = user;
+console.log(`user =>${Name} role => ${role}`)
