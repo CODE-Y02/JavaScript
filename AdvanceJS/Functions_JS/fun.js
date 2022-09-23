@@ -19,3 +19,5 @@ var z = function (par1) {
 console.log(z());
 
 // this abality to use functon as values to pass as arguments and return from functions know as first class function 
+
+// first class citizens -> ability to used like values
