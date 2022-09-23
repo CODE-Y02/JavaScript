@@ -1,27 +1,10 @@
 // NOTE :- PS VIEW PREVIOUS COMMIT FOR ALL TOPICS 
 
+// parameters and arguments 
 
-
-// function statement aka function declaration
-function a() {
-  console.log("a is called");
+var b = function (parem1,parem2){
+    // param1 and param2 are paremeters 
+    console.log("b is called")
 }
 
-//Named Function expression 
-var b = function xyz() {
-    console.log(xyz)
-    console.log("b is called");
-  };
-a()
-b()
-xyz(); // gives error 
-
-
-
-// Ananomys function :-
-// function () {
-
-// }
-// ananymos function cannot be used standalone like above it gives syntax error ;
-// Use :- anamomys function is used where function is used as values
-
+b(1,2) // 1 and 2 are arguments
