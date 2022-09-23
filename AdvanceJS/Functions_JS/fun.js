@@ -1,10 +1,21 @@
-// NOTE :- PS VIEW PREVIOUS COMMIT FOR ALL TOPICS 
+// NOTE :- PS VIEW PREVIOUS COMMIT FOR ALL TOPICS
 
-// parameters and arguments 
+// First class function
+// we can pass function inside of functions
+var b = function (par1) {
+  console.log(par1);
+};
 
-var b = function (parem1,parem2){
-    // param1 and param2 are paremeters 
-    console.log("b is called")
-}
+b(function () {});
 
-b(1,2) // 1 and 2 are arguments
+function xyz() {}
+b(xyz);
+
+//we can also return function from function
+var z = function (par1) {
+  return function () {};
+};
+
+console.log(z());
+
+// this abality to use functon as values to pass as arguments and return from functions know as first class function 
