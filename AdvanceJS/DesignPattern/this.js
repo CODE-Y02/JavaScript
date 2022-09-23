@@ -4,7 +4,7 @@
 
 this.table = "window table";
 
-//this inside inner function 
+//this inside inner function
 /*
 //this gives error 
 const cleanTable = function(soap){
@@ -15,7 +15,7 @@ const cleanTable = function(soap){
     innerfun(soap)
 }
 */
-//we have 3 solution to above problem 
+//we have 3 solution to above problem
 
 //sol 1:-
 /*
@@ -39,23 +39,13 @@ const cleanTable = function(soap){
 }
 */
 // sol 3 :-
-const cleanTable = function(soap){
-    const innerfun = (_soap)=>{
+const cleanTable = function (soap) {
+  const innerfun = (_soap) => {
     console.log(`cleaning ${this.table} using ${_soap}`);
-        
-    }
-    innerfun(soap)
-}
+  };
+  innerfun(soap);
+};
 // arrow fun takes this of parent
-
-
-
-
-
-
-
-
-
 
 this.garage = {
   table: "gargae table ",
@@ -71,12 +61,15 @@ let privateRoom = {
   },
 };
 
-// privateRoom.cleanTable();
+// this inside constructor
+let createRoom = function (name) {
+  this.table = `${name}'s Table`;
+};
 
-// this.garage.cleanTable();
+createRoom.prototype.cleanTable = function (soap) {
+  console.log(`cleaning ${this.table} using ${soap}`);
+};
+const JakesRoom = new createRoom("jake");
+const JameRoom = new createRoom("jame");
 
-
-
-cleanTable.call(this,'some soap')
-cleanTable.call(this.garage,'some soap')
-cleanTable.call(privateRoom,'some soap')
+JakesRoom.cleanTable()
