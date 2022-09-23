@@ -60,20 +60,115 @@ console.log(a2);
 
 */
 
+//Task 10 Adv closure
+/*
+1)
+function y() {
+  setTimeout(() => console.log(a), 1000);
+
+  console.log("Done Coding");
+}
+
+y();
+
+output :-
+Done Coding
+reference error
+
+reason :-
+when we call y , context of set timeout along with closure of y is created saperately and once remaining function is executed then settimeout start executing,
+there is no a in sxope of y or closure of settimeout
 
 
 
 
+2)
+function y() {
+  setTimeout(() => console.log(a), 0);
+
+  console.log("Done Coding");
+}
+
+y();
+
+output:-
+Done Coding
+refrence error 
+
+reason :- settimeout is under function y , once y done executing then its settimer will start executing no matter whats timer is , therefore we got 'Done coding' first . 
+we got reference error because a is not present in settimemout or in closure of y 
+
+
+
+3)
+function y() {
+  for (var i = 1; i < 6; i++) {
+    setTimeout(() => console.log(i), i * 1000);
+  }
+
+  console.log("Done Coding");
+}
+
+y();
+
+output :- 
+Done Coding
+6 5 times 
+
+reason:- when we call y , for loop is executed inside for loop we declared i using var this var actually is decalred in its parent scope i.e scope of function y so in for loop we have settimeout so once for loop completed exectution we have i =6 now when  we start executing settimeout at end we have i pointed to its value 6 
+
+like -> function y() {
+  var i ;
+  for (i=1 ; i < 6; i++) {
+    setTimeout(() => console.log(i), i * 1000);
+  }
+  // at end we get i =6 
+
+  console.log("Done Coding");
+}
 
 
 
 
+4)
+function y() {
+  for (let i = 1; i < 6; i++) {
+    setTimeout(() => console.log(i), i * 1000);
+  }
+
+  console.log("Done Coding");
+}
+
+y();
 
 
+output:-
+Done Coding
+1
+2
+3
+4
+5
+
+reason:- 
+settimeout will be exicuted once cunction y execution is done , therefore we get Done Coding first, 
+as in for loop let is block scope value of i will be different for each settimeout therefore we get 1 2 3 4 5
 
 
+5) Answer:-
 
+const Name = (arr)=>{
+  let i =0;
+  return function x(){
+    console.log("hello"+arr[i])
+    i++;
+  }
+}
 
+let fun = Name(["Ram","Shyam"]);
 
+fun()// Print Hello Ram
 
+fun()//print Hello Shyam
 
+*/
