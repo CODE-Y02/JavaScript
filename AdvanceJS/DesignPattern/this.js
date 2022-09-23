@@ -61,15 +61,17 @@ let privateRoom = {
   },
 };
 
-// this inside constructor
-let createRoom = function (name) {
-  this.table = `${name}'s Table`;
-};
+// this inside class
+class createRoom {
+  constructor(name) {
+    this.table = `${name}'s Table`;
+  }
+  cleanTable(soap) {
+    console.log(`cleaning ${this.table} using ${soap}`);
+  }
+}
 
-createRoom.prototype.cleanTable = function (soap) {
-  console.log(`cleaning ${this.table} using ${soap}`);
-};
 const JakesRoom = new createRoom("jake");
 const JameRoom = new createRoom("jame");
 
-JakesRoom.cleanTable('special soap')
+JakesRoom.cleanTable("special soap");
