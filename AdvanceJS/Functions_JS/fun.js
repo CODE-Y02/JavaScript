@@ -1,6 +1,4 @@
-// statement vs expresion
-a(); // output --> "a is called"
-b(); // output --> type error because b is variable in context
+// NOTE :- PS VIEW PREVIOUS COMMIT FOR ALL TOPICS 
 
 
 
@@ -9,10 +7,16 @@ function a() {
   console.log("a is called");
 }
 
-//function expression :- when function is assigned to variable
-var b = function () {
-  console.log("b is called");
-};
+//Named Function expression 
+var b = function xyz() {
+    console.log(xyz)
+    console.log("b is called");
+  };
+a()
+b()
+xyz(); // gives error 
+
+
 
 // Ananomys function :-
 // function () {
