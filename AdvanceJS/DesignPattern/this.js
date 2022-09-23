@@ -72,4 +72,4 @@ createRoom.prototype.cleanTable = function (soap) {
 const JakesRoom = new createRoom("jake");
 const JameRoom = new createRoom("jame");
 
-JakesRoom.cleanTable()
+JakesRoom.cleanTable('special soap')
