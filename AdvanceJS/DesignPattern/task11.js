@@ -34,17 +34,19 @@ class Student {
 
   setPlacemenMarks(minMarks) {
     return (minAge) => {
-      if (this.age > minAge && this.marks > minMarks) return true;
-      else return false;
+      if (this.age > minAge && this.marks > minMarks) {
+        // console.log(`${this.name} is eligible for placement`)
+        return true;
+      } else return false;
     };
   }
 }
 
 // Create 5 students with different names and age.
-let s1 = new Student("Tom", 15, 789456, 50);
+let s1 = new Student("Tom", 26, 789456, 50);
 let s2 = new Student("harry potter", 25, 152015, 40);
 let s3 = new Student("tony", 22, 001100, 99);
-let s4 = new Student("jerry", 14, 111, 49);
+let s4 = new Student("jerry", 24, 111, 49);
 let s5 = new Student("G one", 22, 15454, 20);
 
 s1.isEligible();
@@ -52,5 +54,13 @@ s5.isEligible();
 
 s5.totalStudents();
 
-console.log(s2.setPlacemenMarks(40)(21));
-console.log(s3.setPlacemenMarks(40)(21));
+// console.log(s2.setPlacemenMarks(40)(21));
+// console.log(s3.setPlacemenMarks(40)(21));
+
+//Run the code across all the students and print the names of egligible students.
+Student.AllStudentsData.map((eachStudent) => {
+  // console.log(eachStudent)
+  if (eachStudent.setPlacemenMarks(40)(21)) {
+    console.log(eachStudent.name + " is eligible for placement");
+  }
+});
