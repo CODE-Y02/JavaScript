@@ -13,3 +13,11 @@ function a() {
 var b = function () {
   console.log("b is called");
 };
+
+// Ananomys function :-
+// function () {
+
+// }
+// ananymos function cannot be used standalone like above it gives syntax error ;
+// Use :- anamomys function is used where function is used as values
+
