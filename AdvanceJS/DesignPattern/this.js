@@ -4,11 +4,57 @@
 
 this.table = "window table";
 
-const cleanTable = function (soap) {
-  console.log(`cleaning ${this.table} using ${soap}`);
-};
-// cleanTable()
-// cleanTable.call(this,'some soap')
+//this inside inner function 
+/*
+//this gives error 
+const cleanTable = function(soap){
+    const innerfun = function(_soap){
+    console.log(`cleaning ${this.table} using ${_soap}`);
+        
+    }
+    innerfun(soap)
+}
+*/
+//we have 3 solution to above problem 
+
+//sol 1:-
+/*
+const cleanTable = function(soap){
+    let that = this;
+    const innerfun = function(_soap){
+    console.log(`cleaning ${that.table} using ${_soap}`);
+        
+    }
+    innerfun(soap)
+}
+*/
+//sol 2 :-
+/*
+const cleanTable = function(soap){
+    const innerfun = function(_soap){
+    console.log(`cleaning ${this.table} using ${_soap}`);
+        
+    }
+    innerfun.call(this,soap)
+}
+*/
+// sol 3 :-
+const cleanTable = function(soap){
+    const innerfun = (_soap)=>{
+    console.log(`cleaning ${this.table} using ${_soap}`);
+        
+    }
+    innerfun(soap)
+}
+// arrow fun takes this of parent
+
+
+
+
+
+
+
+
 
 
 this.garage = {
