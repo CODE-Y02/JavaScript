@@ -30,4 +30,7 @@ function attachEventListber(){
 attachEventListber();
 
 
+// garbage collection :-
+// eventlistners holds memory space thats why they are heavy 
+// therefore we need to remove un necessary event listners 
 
