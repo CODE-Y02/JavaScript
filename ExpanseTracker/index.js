@@ -8,8 +8,7 @@ window.addEventListener("DOMContentLoaded", showOnScreen);
 // console.dir(form);
 form.addEventListener("submit", addExpense);
 
-function addExpense(event) {
-  event.preventDefault();
+function addExpense() {
   let amount = document.getElementById("expanse");
   let desc = document.getElementById("desc");
   let type = document.getElementById("ExpanaseType");
@@ -58,14 +57,13 @@ function showOnScreen() {
 }
 
 function delExp(idx) {
-
   console.log(idx);
 
   // all expenses array
-  let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses")) 
+  let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses"));
 
   let newArr = AllExpenses.filter((curr, index) => {
-    if(index != idx) return curr
+    if (index != idx) return curr;
   });
 
   //saving on local storage
