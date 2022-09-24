@@ -1,0 +1,117 @@
+ how Execution context goes about executing callback function. Explain each step
+ex-
+        console.log('start');
+
+        setTimeout(function cb(){
+            console.log('callback');
+        }, 5000);
+
+        console.log('end');
+
+
+    when program start executing global Execution context is created in call stack .
+        on console.log('start') start is printed on console;
+        on setTimeout an timer event is craeted in memory with context of callback function cb for 5000ms , and compiler continue 
+        on console.log('end') end is printed ;
+        now nothing to execute so global Execution context will be removed from call stack;
+        now event loop will check is there anything in callback queue ;
+        if timer of setTimeout is expired then function cb is pushed in callback queue;
+        now event loop push callback function cb into call stack and execute it ;
+        now on Execution of cb console.log('callback') print 'callback';
+        now when cb done executing it is removed from call stack ;
+
+
+When is the global execution context removed from the stack?
+    when everything except events and timer done or async function (like setTimeout) done executing  global execution context removed from the stack;
+    
+explain how does the DOM APIs and how callback is encounter and stored in event loop and finally when is it executed
+ex- 
+         console.log('start');
+
+        document.getElementById('btn')
+        .addEventListener('click',function cb(){
+              console.log('callback');
+            }
+        )
+
+        console.log('end');
+
+    when program start executing global Execution context (GEC) is created in call stack .
+        now on log "start" is printed;
+        on document.getElementById('btn') DOM API will look for id btn and 
+        on addEventListener DOM API will register callback cb in web api enviorment and attach click event to it ;
+        on console.log('end') end is printed ;
+        now there nothing to execute therefore GEC is removed from call stack;
+
+        now when when user click on btn cb is push into callback queue and event loop will check is call stack empty if yes then it will push
+        cb into call stack;
+        now cb will except callback is printed and after done executing it will removed from call stack;
+
+
+explain why do we need the callback queue
+    if we have more than one callback to execute we need to maintain order in in case of clash it will execute in fifo order ,
+    but we only have one call stack that execute single callback at a time therefore to maintain this order of execution we need callback queue
+
+
+Explain how does fetch work when clubbed with cb.
+ex-
+        console.log('start');
+
+        setTimeout(function cbt(){
+            console.log('callback');
+        }, 5000);
+
+        fetch('https://netflix.com/').then(function cbf(){
+            console.log('NetFlix')
+        })
+
+        // more 1 million lines of code 
+        console.log('end');
+
+
+    when program start executing global Execution context (GEC) is created in call stack .
+    now "start" is printed;
+    on setTimeout cbt is register in web api enviorment and timer of 5000ms is start;
+    on fetch cbf callback is register in web api enviorment and request go to netflix ;
+    now suppose netflix server is super fast and we get response within 10ms , now cbf callback will pushed into microtask queue ;
+    remember that we are still executing 1 million lines of code and our timer of 5000 ms is expired , now cbt is pushed into callback queue;
+
+    when 1 million lines of code and console.log('end') done executing 
+    end is printed and GEC is removed from call stack;
+    now when call stack is empty , event loop will look into microtask queue and callback queue;
+    now microtask queue has higher priority therefore cbf is push into call stack and NetFlix printed and it removed from call stack;
+    now cbt is push into call stack and execute print callback and then poped from call stack;
+
+
+What is microtask queue and how is it different
+    microtask queue is special queue that work same like callback queue but have higher priority than it;
+    promises and muntation observer goes into microtask queue;
+
+
+What is starvation ?
+    suppose we have one task in microtask queue (microtask) and one in callback queue;
+    now as we know that microtask has higher priority it will execute first , but if microtask creates new microtast and so on then task on callback queue will never be executed . This is called starvation .
+
+    
+Why is a callback queue used and not a callback stack?
+    async function or event executed in fifo manner ex- if we have multiple timer of same time then we will have multiple callback function to be executed , in case like this we need to maintain FIFO order that is not possible using stack there fore we use callback queue not callback stack;
+
+
+
+Explain how does event loop handle async code? why does it not wait for async function ?
+    event loop constantly monitor call stack and callback queue;
+    whenever js engine encounter async code it will save it in memory to call it later ;
+    when all code finished executing event loop will check it there any async task in callback queue if there is then it will pushit in Execution stack and execute it ;
+
+why does it not wait for async function ?
+ because js is single threaded language ;
+
+
+
+
+
+
+
+
+
+
