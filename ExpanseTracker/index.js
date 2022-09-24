@@ -21,12 +21,17 @@ function addExpense(event) {
     type: type.value,
   };
 
-  //lets create key
-  let key = `${Date.now()}`;
-  console.log(key)
+  //get local storage
+  // if AllExpenses =0 ; then set empty array
+  let storeArr = JSON.parse(localStorage.getItem("AllExpenses")) || [];
+
+  // console.log(storeArr);
+
+  //add new expense
+  storeArr.push(expenseObj);
 
   //saving on local storage
-  localStorage.setItem(key, JSON.stringify(expenseObj));
+  localStorage.setItem("AllExpenses", JSON.stringify(storeArr));
 
   //show on screen
   showOnScreen();
@@ -38,34 +43,48 @@ function addExpense(event) {
 }
 
 function showOnScreen() {
-  //   console.log(localKeysArr)
-
   let list = document.getElementById("listExpense");
   list.innerHTML = "";
+  // all expenses array
+  let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses")) || [];
 
-  let keysArr = Object.keys(localStorage);
-
-  keysArr.map((key) => {
-    // console.log(key);
-    let eachObj = JSON.parse(localStorage.getItem(key));
-    // console.log(eachObj);
-    let newHtml = `<li class="listItem" id="${key}">Expense Type = ${eachObj.type}   Amount =  ${eachObj.amount}   Description = ${eachObj.desc} <button onclick='delExp("${key}")'>Delete</button><button onclick="editExp('${key}')">Edit</button></li>`;
+  // display on dom
+  AllExpenses.forEach((expanse, idx) => {
+    let newHtml = `<li class="listItem" id="${idx}">Expense Type = ${expanse.type}   Amount =  ${expanse.amount}   Description = ${expanse.desc} <button onclick='delExp("${idx}")'>Delete</button><button onclick="editExp('${idx}')">Edit</button></li>`;
 
     //create new li
     list.innerHTML = list.innerHTML + newHtml;
   });
 }
 
-function delExp(id) {
-//   console.log("id=", id);
-  //this id is key
-  localStorage.removeItem(id);
+function delExp(idx) {
+
+  console.log(idx);
+
+  // all expenses array
+  let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses")) 
+
+  let newArr = AllExpenses.filter((curr, index) => {
+    if(index != idx) return curr
+  });
+
+  //saving on local storage
+  localStorage.setItem("AllExpenses", JSON.stringify(newArr));
   showOnScreen();
 }
 
 function editExp(id) {
-  let expense = JSON.parse(localStorage.getItem(id));
+  // all expenses array
+  let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses"));
+
+  let expense = AllExpenses[id]; // id --> index
+
+  //now delete expense
   delExp(id);
+
+  showOnScreen();
+
+  //set value of form
   let amount = document.getElementById("expanse");
   let desc = document.getElementById("desc");
   let type = document.getElementById("ExpanaseType");
