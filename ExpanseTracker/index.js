@@ -22,7 +22,8 @@ function addExpense(event) {
   };
 
   //lets create key
-  let key = `EA${amount.value}-D${desc.value}-T${type.value}`;
+  let key = `${Date.now()}`;
+  console.log(key)
 
   //saving on local storage
   localStorage.setItem(key, JSON.stringify(expenseObj));
@@ -33,7 +34,7 @@ function addExpense(event) {
   //clear values
   amount.value = "";
   desc.value = "";
-  type.value = "";
+  type.value = "other";
 }
 
 function showOnScreen() {
