@@ -11,13 +11,17 @@ const posts = [
   },
 ];
 
+let intervalId = 0;
 function getPost() {
-  setTimeout(() => {
+  clearInterval(intervalId);
+  intervalId = setInterval(() => {
     let output = "";
-
+    console.log(intervalId);
     posts.forEach((post, index) => {
-        // console.log(new Date().getTime() - post.createdAt )
-      output += `<li>${post.title}  - last updated ${(new Date().getTime()- post.createdAt)/1000}sec before </li>`;
+      // console.log(new Date().getTime() - post.createdAt )
+      output += `<li>${post.title}  - last updated ${
+        (new Date().getTime() - post.createdAt) / 1000
+      }sec before </li>`;
     });
     document.body.innerHTML = output;
   }, 1000);
@@ -25,7 +29,7 @@ function getPost() {
 
 function createPost(post, callback) {
   setTimeout(() => {
-    posts.push({...post,createdAt: new Date().getTime(),});
+    posts.push({ ...post, createdAt: new Date().getTime() });
     callback();
   }, 2000);
 }
@@ -33,7 +37,7 @@ function createPost(post, callback) {
 
 function create4thPost(post, callback) {
   setTimeout(() => {
-    posts.push({...post,createdAt: new Date().getTime(),});
+    posts.push({ ...post, createdAt: new Date().getTime() });
     callback(
       {
         title: "Post Four",
@@ -42,11 +46,14 @@ function create4thPost(post, callback) {
       getPost
     );
 
-    console.log(posts)
+    console.log(posts);
   }, 2000);
 }
 
-create4thPost({
+create4thPost(
+  {
     title: "Post Three",
     body: "this is post three",
-  },createPost)
+  },
+  createPost
+);
