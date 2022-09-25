@@ -6,13 +6,26 @@ let form = document.getElementById("form");
 window.addEventListener("DOMContentLoaded", showOnScreen());
 
 // console.dir(form);
-form.addEventListener("submit", addExpense);
+form.addEventListener("submit", (e) => addExpense(e));
 
 function addExpense(e) {
   e.preventDefault();
   let amount = document.getElementById("expanse");
   let desc = document.getElementById("desc");
   let type = document.getElementById("ExpanaseType");
+
+  let id = document.getElementById("expenseId").value;
+
+  if (id) {
+    let AllExpenses = JSON.parse(localStorage.getItem("AllExpenses"));
+    // console.log("ALL ", AllExpenses);
+    let filteredArr = AllExpenses.filter((expense) => expense.id != id);
+    // console.log("after = ", filteredArr);
+    // console.log(edit)
+
+    //saving on local storage
+    localStorage.setItem("AllExpenses", JSON.stringify(filteredArr));
+  }
 
   //new expense obj
   let expenseObj = {
@@ -72,11 +85,16 @@ function deleteEditExp(id, edit = false) {
 
   if (edit) {
     //find expense
-    let expenseArr = AllExpenses.filter((expense) => (expense.id = id));
+    let expenseArr = AllExpenses.filter((expense) => (expense.id == id));
 
     document.getElementById("expanse").value = expenseArr[0].amount;
     document.getElementById("desc").value = expenseArr[0].desc;
     document.getElementById("ExpanaseType").value = expenseArr[0].type;
+
+    document.getElementById("expenseId").value = id;
+
+    showOnScreen(filteredArr);
+    return;
   }
 
   //saving on local storage
