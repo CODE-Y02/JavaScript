@@ -7,20 +7,32 @@
     <title>Expanase Tracker</title>
 
     <style>
+      
+      /* form,
+      h1 {
+        text-align: center;
+        border-bottom: 2px solid gainsboro;
+        padding-bottom: 10px;
+      } */
       label {
         margin: 5px;
       }
       button {
         margin: 5px;
       }
+      /* .box {
+        display: flex;
+        justify-content: center;
+      } */
     </style>
   </head>
   <body>
+    <h1>Expense Tracker</h1>
     <form id="form">
       <label for="expense">Choose Expanase Amount</label>
-      <input type="number" id="expanse" class="inpBox" required/>
+      <input type="number" id="expanse" class="inpBox" required />
       <label for="desc">Expanase Description</label>
-      <input type="text" id="desc" class="inpBox" required/>
+      <input type="text" id="desc" class="inpBox" required />
       <label for="ExpanaseType">Choose Expanase Type</label>
       <select id="ExpanaseType">
         <option value="food">Food</option>
@@ -31,7 +43,12 @@
       <input type="submit" value="Add Expanase" id="submit" />
     </form>
     <div class="box">
-      <ul id="listExpense"></ul>
+      <ul id="listExpense">
+        <!-- <li>
+          <button onclick="delExp()">Delete</button>
+          <button onclick="EditExp()">Delete</button>
+        </li> -->
+      </ul>
     </div>
     <script src="./index.js"></script>
   </body>
