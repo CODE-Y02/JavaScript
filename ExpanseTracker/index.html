@@ -6,46 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expanase Tracker</title>
 
-    <style>
-      
-      /* form,
-      h1 {
-        text-align: center;
-        border-bottom: 2px solid gainsboro;
-        padding-bottom: 10px;
-      } */
-      label {
-        margin: 5px;
-      }
-      button {
-        margin: 5px;
-      }
-      /* .box {
-        display: flex;
-        justify-content: center;
-      } */
-    </style>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <h1>Expense Tracker</h1>
-    <form id="form">
-      <label for="expense">Choose Expanase Amount</label>
-      <input type="number" id="expanse" class="inpBox" required />
-      <label for="desc">Expanase Description</label>
-      <input type="text" id="desc" class="inpBox" required />
-      <label for="ExpanaseType">Choose Expanase Type</label>
-      <select id="ExpanaseType">
-        <option value="food">Food</option>
-        <option value="movie">Movie</option>
-        <option value="fuel">Fuel</option>
-        <option value="other" selected>Other</option>
-      </select>
-      <input type="submit" value="Add Expanase" id="submit" />
-      <input type="hidden" id="expenseId">
+    <form id="form" class="box">
+      <div class="inpBox">
+        <label for="expense">Choose Expense Amount</label>
+        <input type="number" id="expanse" required  class="textBox"/>
+      </div>
+      <div class="inpBox">
+        <label for="desc">Expense Description</label>
+        <input type="text" id="desc" required class="textBox"/>
+      </div>
+      <div class="inpBox">
+        <label for="ExpanaseType">Choose Expense Type</label>
+        <select id="ExpanaseType">
+          <option value="food">Food</option>
+          <option value="movie">Movie</option>
+          <option value="fuel">Fuel</option>
+          <option value="other" selected>Other</option>
+        </select>
+      </div>
+      <div class="inpBox">
+        <input type="submit" value="Add Expanase" id="submit" />
+        <input type="hidden" id="expenseId" />
+      </div>
     </form>
-    <div class="box">
+    <div class="box2">
       <ul id="listExpense">
         <!-- <li>
+          
           <button onclick="delExp()">Delete</button>
           <button onclick="EditExp()">Delete</button>
         </li> -->

@@ -64,13 +64,16 @@ function showOnScreen(expenseArr = null) {
   list.innerHTML = "";
   // console.log(expenseArr);
   expenseArr.forEach((expense) => {
-    let newHtml = ` <li> Expense: ${expense.type}     Amount: ${
+    let newHtml = `<li><div class="infoBox">Expense: ${expense.type}     Amount: ${
       expense.amount
-    }    Description:${expense.desc} <button onclick="deleteEditExp('${
+    }    Description:${expense.desc} </div>
+     <div class="controlBox">
+    <button onclick="deleteEditExp('${
       expense.id
     }')">Delete</button><button onclick="deleteEditExp('${
       expense.id
-    }',${true})">Edit</button></li>`;
+    }',${true})">Edit</button>
+          </div></li>`;
 
     list.innerHTML = list.innerHTML + newHtml;
   });
@@ -85,7 +88,7 @@ function deleteEditExp(id, edit = false) {
 
   if (edit) {
     //find expense
-    let expenseArr = AllExpenses.filter((expense) => (expense.id == id));
+    let expenseArr = AllExpenses.filter((expense) => expense.id == id);
 
     document.getElementById("expanse").value = expenseArr[0].amount;
     document.getElementById("desc").value = expenseArr[0].desc;

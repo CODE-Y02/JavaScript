@@ -1,0 +1,69 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fcfcfc;
+}
+
+.box,
+.box2 {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  width: 60%;
+  padding: 10px;
+  margin: 5px;
+  border: 2px solid #514f596c;
+  border-radius: 1px;
+}
+.inpBox {
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+label {
+  margin-right: 5px;
+  flex: 0.4;
+}
+.textBox {
+  flex: 0.6;
+  padding: 2px;
+  font-size: 18px;
+}
+#ExpanaseType {
+  flex: 0.2;
+}
+
+#submit {
+  flex: 1;
+  background-color: black;
+  color: white;
+  font-size: 24px;
+}
+#submit:hover {
+  background-color: #5941a9;
+}
+#submit:active {
+  background-color: green;
+}
+ul {
+  list-style: none;
+}
+li {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+button {
+  padding: 2px;
+  margin: 5px;
+}
+
+li:hover {
+  background-color: black;
+  color: white;
+}
