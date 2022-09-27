@@ -19,9 +19,9 @@ function getPost() {
     console.log(intervalId);
     posts.forEach((post, index) => {
       // console.log(new Date().getTime() - post.createdAt )
-      output += `<li>${post.title}  - last updated ${
+      output += `<li>${post.title}  - Created at  ${
         (new Date().getTime() - post.createdAt) / 1000
-      }sec before </li>`;
+      }sec before  </li>`;
     });
     document.body.innerHTML = output;
   }, 1000);
@@ -57,3 +57,12 @@ create4thPost(
   },
   createPost
 );
+
+function lastEditedInSecondsAgo() {
+  setInterval(() => {
+    posts.map((post) => {
+      let updated = Math.floor((new Date().getTime() - post.createdAt) / 1000);
+      console.log("updated ", updated);
+    });
+  }, 1000);
+}
