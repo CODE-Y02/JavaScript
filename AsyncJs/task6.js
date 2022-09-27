@@ -37,15 +37,16 @@ function getPost() {
     document.body.innerHTML = output;
   }, 1000);
 }
+// getPost()
 
 function createPost(post) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      posts.push({ ...post, createdAt: new Date().getTime() });
-
       const error = false;
       if (!error) {
-        resolve();
+        let added = posts.push({ ...post, createdAt: new Date().getTime() });
+        // console.log("post is added") // this code is already executed just that we dont know its status
+        resolve(added);
       } else {
         reject("SOMETHING WENT WRONG !!!");
       }
@@ -122,3 +123,49 @@ createPost({
     });
   })
   .catch((error) => console.log(error));
+
+// promise.all --> AsyncJs\promisesAll.js
+
+/**
+  I want you to create one more promise called updateLastUserActivityTime. Every time the user creates a post, this promise should be parallely called (should execute in 1 second) .When both the promises (createPost and updateLastUserActivityTime resolve), I want you to console log all the posts created and lastActivityTime of the user. Demo Link [If stuck for long watch the hint 2]
+ 
+Once both the above promises are resolved , I want you to delete the last post by calling the deletion promise. Once successfully deleted, I want you to log the new set of Posts of the user.
+
+Why on Earth do we need promise.all ? Watch this video and answer this question in your own words.
+ */
+
+const updateLastUserActivityTime = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(`Last Activity  ${new Date().toLocaleString()}`);
+  }, 1000);
+});
+
+// function updatedActivity(){
+//     Promise.all([createPost, updateLastUserActivityTime])
+//   .then((value) => {
+//     getPost();
+//     console.log(value[1]);
+//   })
+//   .catch((error) => console.log(error));
+// }
+
+// updatedActivity()
+
+
+
+// createPost({
+//   title: "Post 5",
+//   body: "this is post 5",
+// });
+// createPost({
+//   title: "Post 58",
+//   body: "this is post 5",
+// });
+// createPost({
+//   title: "Post 59",
+//   body: "this is post 5",
+// });
+// createPost({
+//   title: "Post 599",
+//   body: "this is post 5",
+// });
