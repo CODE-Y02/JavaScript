@@ -134,11 +134,11 @@ Once both the above promises are resolved , I want you to delete the last post b
 Why on Earth do we need promise.all ? Watch this video and answer this question in your own words.
  */
 
-const updateLastUserActivityTime = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(`Last Activity  ${new Date().toLocaleString()}`);
-  }, 1000);
-});
+// const updateLastUserActivityTime = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve(`Last Activity  ${new Date().toLocaleString()}`);
+//   }, 1000);
+// });
 
 // function updatedActivity(){
 //     Promise.all([createPost, updateLastUserActivityTime])
@@ -169,3 +169,33 @@ const updateLastUserActivityTime = new Promise((resolve, reject) => {
 //   title: "Post 599",
 //   body: "this is post 5",
 // });
+
+
+
+
+
+
+
+
+
+
+let user = {
+  userName: "yatharth",
+  lastActivityTime: new Date().getTime(),
+};
+
+updateLastUserActivityTime = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    user.lastActivityTime = new Date().getTime();
+    resolve(user.lastActivityTime);
+  }, 1000);
+});
+
+// function userUpdatesPost() {
+  Promise.all([createPost, updateLastUserActivityTime])
+    .then(([createPostResolves, updateLastUserActivityTimeResolves]) => {
+      console.log(updateLastUserActivityTimeResolves);
+    })
+    .catch((error) => console.log(error));
+// }
+// userUpdatesPost()
