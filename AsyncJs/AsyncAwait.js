@@ -35,12 +35,17 @@ console.log("person5: shows ticket");
 */
 
 const preMovie = async () => {
+  //   const promiseWifeBringingTicks = new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve("ticket");
+  //     }, 3000);
+  //   });
   const promiseWifeBringingTicks = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve("ticket");
+      reject("ticket");
     }, 3000);
   });
-
+  /*
   const getPopcorn = new Promise((resolve, reject) => resolve(`popcorn`));
 
   const getCandy = new Promise((resolve, reject) => resolve(`Candy`));
@@ -56,7 +61,15 @@ const preMovie = async () => {
     getCoke,
   ]);
   console.log(`${popcorn} ${candy} ${coke}`);
+*/
 
+  // ERROR HANDLING USING TRY CATCH
+  let ticket;
+  try {
+    ticket = await promiseWifeBringingTicks;
+  } catch (error) {
+    ticket = " sad Face";
+  }
   return ticket;
 };
 
