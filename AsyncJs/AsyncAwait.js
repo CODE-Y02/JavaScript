@@ -43,25 +43,19 @@ const preMovie = async () => {
 
   const getPopcorn = new Promise((resolve, reject) => resolve(`popcorn`));
 
-  const addButter = new Promise((resolve, reject) => resolve(`butter`));
+  const getCandy = new Promise((resolve, reject) => resolve(`Candy`));
+
+  const getCoke = new Promise((resolve, reject) => resolve(`Coke`));
 
   let ticket = await promiseWifeBringingTicks;
   //   console.log("tick =", ticket);  //--> ticket contain resolved val
 
-  console.log(`wife: i have ${ticket}`);
-  console.log(`husband: we should go in`);
-  console.log(`wife: no i am hungry`);
-
-  let popcorn = await getPopcorn;
-  console.log(`husband: i got some ${popcorn}`);
-  console.log(`husband: we should go in`);
-  console.log(`wife: no i need butter on my popcorn`);
-
-  let butter = await addButter;
-  console.log(`husband: i got some ${butter}`);
-  console.log(`husband: anything else ?`);
-  console.log(`wife: lets go we are getting late`);
-  console.log(`husband: Thanks for remainder **grins**`);
+  let [popcorn, candy, coke] = await Promise.all([
+    getPopcorn,
+    getCandy,
+    getCoke,
+  ]);
+  console.log(`${popcorn} ${candy} ${coke}`);
 
   return ticket;
 };
