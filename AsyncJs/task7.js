@@ -134,3 +134,63 @@ const createAndDelete = async () => {
 };
 
 createAndDelete();
+
+//Why were promises discovered?
+/**
+ * because it solves problem of call back hell as give us ability to execute async code in sync format without much modifation in components of code
+ */
+
+// const gotoMarket = new Promise((resolve,reject)=>{
+//   setTimeout(()=>{
+//     resolve('reached market')
+//   },1000)
+// })
+
+// const buySomething = new Promise((resolve,reject)=>{
+//   setTimeout(()=>{
+//     resolve('brought something ')
+//   },2000)
+// })
+
+// const makePayment =new Promise((resolve,reject)=>{
+//   setTimeout(()=>{
+//     resolve('payment done')
+//   },20)
+// })
+
+// const returnHome = new Promise((resolve,reject)=>{
+//   setTimeout(()=>{
+//     resolve('Returned home')
+//   },1000)
+// })
+
+//in above example if your mom send you market to buy something , it is possible that you can return home without bying anything but you cant buy a thing without payment , that defines dependent and indepndent task , its very difficult to write it in form of .than .catch and code is messy
+// lets write it in form of async await
+const TomGoesToBuy = async () => {
+  const gotoMarket = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("reached market");
+    }, 1000);
+  });
+  console.log(gotoMarket);
+  const buySomething = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("brought something ");
+    }, 2000);
+  });
+  console.log(buySomething);
+  const makePayment = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("payment done");
+    }, 20);
+  });
+  console.log(makePayment);
+  const returnHome = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Returned home");
+    }, 1000);
+  });
+
+  console.log(returnHome);
+};
+TomGoesToBuy();
