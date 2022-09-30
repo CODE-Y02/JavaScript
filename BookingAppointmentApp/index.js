@@ -1,6 +1,8 @@
 // import axios from URL("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-window.addEventListener("DOMContentLoaded", showUserOnScreen());
+const API = "4cc9882a3db9413391125df4f21d38d5";
+
+window.addEventListener("DOMContentLoaded", showUserOnScreen);
 
 let form = document.getElementsByClassName("form")[0];
 // console.log(form);
@@ -31,10 +33,7 @@ form.addEventListener("submit", (e) => {
   if (id) {
     // update post
     axios
-      .put(
-        `https://crudcrud.com/api/8b4cfad5ac164e7d9eca43eb1b9d0188/appointments/${id}`,
-        user
-      )
+      .put(`https://crudcrud.com/api/${API}/appointments/${id}`, user)
       .then(showUserOnScreen)
       .catch((err) => showErr(err));
 
@@ -42,10 +41,7 @@ form.addEventListener("submit", (e) => {
   } else {
     //send post
     axios
-      .post(
-        "https://crudcrud.com/api/8b4cfad5ac164e7d9eca43eb1b9d0188/appointments",
-        user
-      )
+      .post(`https://crudcrud.com/api/${API}/appointments`, user)
       .then(showUserOnScreen)
       .catch((err) => showErr(err));
   }
@@ -59,6 +55,7 @@ form.addEventListener("submit", (e) => {
 
 function showErr(errMsg) {
   const errBox = document.getElementById("errMsg");
+  console.log("error msg ", errMsg);
   errBox.innerHTML = `<h2>Error :${errMsg} </h2>`;
   errBox.classList.remove("hide");
 
@@ -68,22 +65,22 @@ function showErr(errMsg) {
   }, 3000);
 }
 
-async function showUserOnScreen() {
+async function showUserOnScreen(e) {
+  //   e.preventDefault();
   let appointments = [];
   let err = false;
   await axios
-    .get(
-      "https://crudcrud.com/api/8b4cfad5ac164e7d9eca43eb1b9d0188/appointments"
-    )
+    .get(`https://crudcrud.com/api/${API}/appointments`)
     .then((res) => {
       //   console.log(res);
       appointments = res.data;
+
       //   console.log(appointments);
     })
     .catch((error) => {
       console.log(error);
-      err = error;
-      showErr(err);
+
+      showErr(error);
     });
 
   //if successfull
@@ -110,9 +107,7 @@ async function showUserOnScreen() {
 
 function delUser(id) {
   axios
-    .delete(
-      `https://crudcrud.com/api/8b4cfad5ac164e7d9eca43eb1b9d0188/appointments/${id}`
-    )
+    .delete(`https://crudcrud.com/api/${API}/appointments/${id}`)
     .then(showUserOnScreen)
     .catch((err) => showErr(err));
 }
@@ -120,14 +115,12 @@ function delUser(id) {
 function editUser(id) {
   //setp 1 get user obj
   axios
-    .get(
-      `https://crudcrud.com/api/8b4cfad5ac164e7d9eca43eb1b9d0188/appointments/${id}`
-    )
+    .get(`https://crudcrud.com/api/${API}/appointments/${id}`)
     .then((user) => {
       let name = document.getElementById("name");
       let email = document.getElementById("email");
       let phone = document.getElementById("phone");
-        // console.log(user.data)
+      // console.log(user.data)
       name.value = user.data.name;
       email.value = user.data.email;
       phone.value = user.data.phone;
@@ -136,5 +129,3 @@ function editUser(id) {
       document.getElementById(id).remove();
     });
 }
-
-
