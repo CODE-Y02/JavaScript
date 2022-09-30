@@ -11,80 +11,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script>
-      let API = "1afefc8f2f464454a27e250eaf8861b1";
-
-      let appointments = []; // appointments Array
-
-      window.addEventListener("DOMContentLoaded", () => {
-        axios
-          .get(`https://crudcrud.com/api/${API}/appointment`)
-          .then((response) => {
-            console.log("DCL", response);
-            appointments = response.data;
-            //now show on screen ;
-            appointments.map((booking) => {
-              console.log(booking);
-              showEachBookingOnScreen(booking);
-            });
-          })
-          .catch((error) => console.log(error));
-      });
-
-      function saveToServer(event) {
-        event.preventDefault();
-        // console.log("submitted");
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-
-        let obj = {
-          name: name,
-          email: email,
-        };
-
-        let edit = false;
-        let Uid;
-        appointments.forEach((user) => {
-          if (user.email == email) {
-            Uid = user._id;
-            edit = confirm(
-              "You have already booked Appointment !!  want to modify??"
-            );
-          }
-        });
-
-        if (edit) {
-          //edit post    PUT REQUEST
-          axios
-            .put(`https://crudcrud.com/api/${API}/appointment/${Uid}`, obj)
-            .catch((error) => console.log(error));
-        } else {
-          axios
-            .post(`https://crudcrud.com/api/${API}/appointment/`, obj)
-            // .then((response) => {
-            //   console.log(response);
-            //   showEachBookingOnScreen(response.data);
-            // })
-            .catch((error) => console.log(error));
-        }
-      }
-
-      function showEachBookingOnScreen(user) {
-        document.getElementById("name").value = "";
-        document.getElementById("email").value = "";
-
-        let oldlist = document.getElementById("userList");
-        let listUID = Date.now();
-        let newEle = `<li  id="${listUID}">
-                  Name: ${user.name}   Email: ${user.email}
-
-                  <button id="del" onclick="deleteBooking('${listUID}')">Delete</button>
-                  <button id="edit" onclick="editBooking('${listUID}')">Edit</button>
-              </li>`;
-
-        oldlist.innerHTML = oldlist.innerHTML + newEle;
-      }
-    </script>
   </head>
   <body>
     <form onsubmit="saveToServer(event)">
@@ -95,5 +21,7 @@
       <input type="submit" id="submit" value="submit" />
     </form>
     <ul id="userList"></ul>
+
+    <script src="./script.js"></script>
   </body>
 </html>
