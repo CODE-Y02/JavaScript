@@ -1,4 +1,5 @@
-let API = "5266710aa43c47a185324357b7258ab5";
+// let API = "5266710aa43c47a185324357b7258ab5";
+let API = "ae5907560a734e389aed11f7d2093408";
 
 let appointments = []; // appointments Array
 
@@ -30,16 +31,14 @@ function saveToServer(event) {
   let email = document.getElementById("email").value;
 
   let obj = {
-    UID: `${Date.now()}`,
     name: name,
     email: email,
   };
-
-  let edit = false;
-  let Uid;
+  let id;
+  let edit;
   appointments.forEach((user) => {
     if (user.email == email) {
-      Uid = user._id;
+      id = user._id;
       edit = confirm(
         "You have already booked Appointment !!  want to modify??"
       );
@@ -49,10 +48,10 @@ function saveToServer(event) {
   if (edit) {
     //edit post    PUT REQUEST
     axios
-      .put(`https://crudcrud.com/api/${API}/appointment/${Uid}`, obj)
+      .put(`https://crudcrud.com/api/${API}/appointment/${id}`, obj)
       .then((response) => {
-        // console.log("postUpdated",response)
-        getAllAppointments();
+        console.log("postUpdated", response);
+        showEachBookingOnScreen({ ...obj, _id: id });
       })
       .catch((error) => console.log(error));
   } else {
@@ -72,32 +71,25 @@ function showEachBookingOnScreen(user) {
 
   let oldlist = document.getElementById("userList");
 
-  let newEle = `<li  id="${user.UID}">
+  let newEle = `<li  id="${user._id}">
                   Name: ${user.name}   Email: ${user.email}
 
-                  <button id="del" onclick="deleteBooking(event,'${user.UID}')">Delete</button>
-                  <button id="edit" onclick="editBooking(event,'${user.UID}')">Edit</button>
+                  <button id="del" onclick="deleteBooking(event,'${user._id}')">Delete</button>
+                  <button id="edit" onclick="editBooking(event,'${user._id}')">Edit</button>
               </li>`;
 
   oldlist.innerHTML = oldlist.innerHTML + newEle;
 }
 
 function removeFromScreen(uid) {
-  // this id is id of li tag
   document.getElementById(uid).remove();
 }
 
 function deleteBooking(e, uid) {
   e.preventDefault();
-  // this id is id of li tag
-
-  //find _id of server
-  let arrTemp = appointments.filter((obj) => obj.UID == uid);
-  console.log(arrTemp[0]);
-  let deletedId = arrTemp[0]._id;
-
+  // uid == _id
   axios
-    .delete(`https://crudcrud.com/api/${API}/appointment/${deletedId}`)
+    .delete(`https://crudcrud.com/api/${API}/appointment/${uid}`)
     .then(() => {
       removeFromScreen(uid);
     })
@@ -108,11 +100,11 @@ function editBooking(e, uid) {
   e.preventDefault();
 
   // this id is id of li tag
-
-  let obj = appointments.filter((obj) => obj.UID == uid);
+  // console.log(appointments);
+  let obj = appointments.filter((obj) => obj._id == uid)[0];
   console.log(obj);
   document.getElementById("name").value = obj.name;
-  document.getElementById("email").value = obj.value;
+  document.getElementById("email").value = obj.email;
 
   removeFromScreen(uid);
 }
