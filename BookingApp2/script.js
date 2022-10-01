@@ -34,24 +34,17 @@ function saveToServer(event) {
     name: name,
     email: email,
   };
-  let id;
-  let edit;
-  appointments.forEach((user) => {
-    if (user.email == email) {
-      id = user._id;
-      edit = confirm(
-        "You have already booked Appointment !!  want to modify??"
-      );
-    }
-  });
 
-  if (edit) {
+  let id = document.getElementById("hidden").value || undefined;
+
+  if (id) {
     //edit post    PUT REQUEST
     axios
       .put(`https://crudcrud.com/api/${API}/appointment/${id}`, obj)
       .then((response) => {
         console.log("postUpdated", response);
         showEachBookingOnScreen({ ...obj, _id: id });
+        // getAllAppointments()
       })
       .catch((error) => console.log(error));
   } else {
@@ -99,12 +92,15 @@ function deleteBooking(e, uid) {
 function editBooking(e, uid) {
   e.preventDefault();
 
-  // this id is id of li tag
-  // console.log(appointments);
-  let obj = appointments.filter((obj) => obj._id == uid)[0];
-  console.log(obj);
-  document.getElementById("name").value = obj.name;
-  document.getElementById("email").value = obj.email;
-
-  removeFromScreen(uid);
+  let hidden = document.getElementById("hidden");
+  hidden.value = "";
+  axios
+    .get(`https://crudcrud.com/api/${API}/appointment/${uid}`)
+    .then((response) => {
+      document.getElementById("name").value = response.data.name;
+      document.getElementById("email").value = response.data.email;
+      hidden.value = uid;
+      removeFromScreen(uid);
+    })
+    .catch((error) => console.log("error in edit", error));
 }
