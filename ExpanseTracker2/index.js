@@ -55,6 +55,7 @@ function sendData(e) {
         allExpenses = allExpenses.filter((obj) => obj._id != id);
         allExpenses.push({ ...expenseObj, _id: id });
         showOnscreen({ ...expenseObj, _id: id });
+        document.getElementById("expenseId").value = "";
       })
       .catch((error) => console.log(error));
   } else {
