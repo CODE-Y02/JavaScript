@@ -1,5 +1,6 @@
 // api -->https://crudcrud.com/api/b5cd782016874bb280a85b2ad8e26d82
-const API_KEY = "a4c90edd534e4808ab0a688dacb83737";
+const API_KEY = "a4c90edd534e4808ab0a688dacb83737"; 
+
 
 // All expenses
 let allExpenses = [];
@@ -91,6 +92,8 @@ function removeFromScreen(id) {
   document.getElementById(id).remove();
 }
 
+
+// DELETE
 function delExp(id) {
   //delete
   axios
@@ -104,6 +107,8 @@ function delExp(id) {
     .catch((error) => console.log(error));
 }
 
+
+// EDIT 
 function editExp(id) {
   // expense id
   document.getElementById("expenseId").value = id;

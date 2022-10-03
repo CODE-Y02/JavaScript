@@ -14,7 +14,7 @@ body {
   border: 2px solid lightslategrey;
   padding: 5px;
 }
-
+/* form styles */
 .inpBox {
   display: flex;
   justify-content: space-between;
@@ -36,6 +36,8 @@ select {
   padding: 5px;
   font-size: 18px;
 }
+
+/* list styles */
 #submit {
   width: 100%;
   padding: 5px;
