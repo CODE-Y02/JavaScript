@@ -1,9 +1,8 @@
 // api -->https://crudcrud.com/api/b5cd782016874bb280a85b2ad8e26d82
-const API_KEY = "a4c90edd534e4808ab0a688dacb83737"; 
+const API_KEY = "3c0c95312d914a9aab205469b163f1dd";
 
-
-// All expenses
-let allExpenses = [];
+//global id for editing
+let editId = undefined;
 
 // first get data from form
 let form = document.getElementById("form");
@@ -15,65 +14,63 @@ window.addEventListener("DOMContentLoaded", getAll);
 form.addEventListener("submit", (e) => sendData(e));
 
 //getAll
-function getAll(event) {
-  event.preventDefault();
-  axios
-    .get(`https://crudcrud.com/api/${API_KEY}/expenses`)
-    .then((Response) => {
-      console.log(Response.data);
-      allExpenses = Response.data;
 
-      //display all
-      allExpenses.map((expense) => {
-        showOnscreen(expense);
-      });
-    })
-    .catch((error) => console.log(error));
+async function getAll(event) {
+  event.preventDefault();
+  try {
+    let res = await axios.get(`https://crudcrud.com/api/${API_KEY}/expenses`);
+
+    //disolay all exp
+    res.data.map((expense) => {
+      showOnscreen(expense);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // sendData --> post and put
-function sendData(e) {
-  e.preventDefault();
-  console.log("send data");
-  let amount = document.getElementById("amount");
-  let desc = document.getElementById("desc");
-  let type = document.getElementById("ExpanaseType");
+async function sendData(e) {
+  try {
+    e.preventDefault();
+    console.log("send data");
+    let amount = document.getElementById("amount");
+    let desc = document.getElementById("desc");
+    let type = document.getElementById("ExpanaseType");
 
-  let expenseObj = {
-    amount: amount.value,
-    desc: desc.value,
-    type: type.value,
-  };
+    let expenseObj = {
+      amount: amount.value,
+      desc: desc.value,
+      type: type.value,
+    };
 
-  let id = document.getElementById("expenseId").value;
-  if (id) {
-    console.log(id);
-    //edit // put request
-    axios
-      .put(`https://crudcrud.com/api/${API_KEY}/expenses/${id}`, expenseObj)
-      .then((response) => {
-        console.log(response);
-        allExpenses = allExpenses.filter((obj) => obj._id != id);
-        allExpenses.push({ ...expenseObj, _id: id });
-        showOnscreen({ ...expenseObj, _id: id });
-        document.getElementById("expenseId").value = "";
-      })
-      .catch((error) => console.log(error));
-  } else {
-    //post
-    axios
-      .post(`https://crudcrud.com/api/${API_KEY}/expenses`, expenseObj)
-      .then((response) => {
-        console.log(response);
-        allExpenses.push(response.data);
-        showOnscreen(response.data);
-      })
-      .catch((error) => console.log(error));
+    if (editId) {
+      // console.log(editId);
+      //edit // put request
+
+      await axios.put(
+        `https://crudcrud.com/api/${API_KEY}/expenses/${editId}`,
+        expenseObj
+      );
+      showOnscreen({ ...expenseObj, _id: editId });
+      editId = undefined;
+    } else {
+      // try {
+      //post
+      let response = await axios.post(
+        `https://crudcrud.com/api/${API_KEY}/expenses`,
+        expenseObj
+      );
+      showOnscreen(response.data);
+    }
+    amount.value = "";
+    desc.value = "";
+    type.value = "other";
+  } 
+  catch (error) 
+  {
+    console.log(error);
   }
-
-  amount.value = "";
-  desc.value = "";
-  type.value = "other";
 }
 
 //show on screen
@@ -92,35 +89,37 @@ function removeFromScreen(id) {
   document.getElementById(id).remove();
 }
 
-
 // DELETE
-function delExp(id) {
+async function delExp(id) {
   //delete
-  axios
-    .delete(`https://crudcrud.com/api/${API_KEY}/expenses/${id}`)
-    .then((response) => {
-      //remove from screen
-      removeFromScreen(id);
-      //removefrom all expenses
-      allExpenses = allExpenses.filter((obj) => obj._id != id);
-    })
-    .catch((error) => console.log(error));
+  try {
+    await axios.delete(`https://crudcrud.com/api/${API_KEY}/expenses/${id}`);
+    removeFromScreen(id);
+  } catch (error) {
+    console.log("delete", error);
+  }
 }
 
+// EDIT
+async function editExp(id) {
+  try {
+    //get expense
+    let expenseObj = await axios.get(
+      `https://crudcrud.com/api/${API_KEY}/expenses/${id}`
+    );
+    console.log(expenseObj);
 
-// EDIT 
-function editExp(id) {
-  // expense id
-  document.getElementById("expenseId").value = id;
-  let amount = document.getElementById("amount");
-  let desc = document.getElementById("desc");
-  let type = document.getElementById("ExpanaseType");
-  //find obj
-  let editObj = allExpenses.filter((obj) => obj._id == id)[0];
-  amount.value = editObj.amount;
-  desc.value = editObj.desc;
-  type.value = editObj.type;
+    //set global edit id
+    editId = id;
 
-  //remove from screen
-  removeFromScreen(id);
+    //now set data on form
+    document.getElementById("amount").value = expenseObj.data.amount;
+    document.getElementById("desc").value = expenseObj.data.desc;
+    document.getElementById("ExpanaseType").value = expenseObj.data.type;
+
+    //remove from screen
+    removeFromScreen(id);
+  } catch (error) {
+    console.log("edit function", error);
+  }
 }
