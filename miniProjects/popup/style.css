@@ -15,10 +15,10 @@ body {
 
   flex-direction: column;
 }
-.hidden {
+/* .hidden {
   visibility: hidden;
   display: none;
-}
+} */
 button {
   background-color: rebeccapurple;
   color: white;
@@ -35,9 +35,13 @@ button {
 
   background-color: rgba(0, 0, 0, 0.5);
 
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+}
+
+#popup-wrap.active {
+  display: flex;
 }
 
 .popup {
