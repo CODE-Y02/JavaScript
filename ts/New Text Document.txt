@@ -1,0 +1,112 @@
+What advantage does typescript gives us?Explain with example?
+
+--> problem with js is its loose data types ex -> sum(a,b) returns sum of a+b   
+
+    if we pass sum(5,2) ==> 7 as output which is correct 
+
+ but sum('5',2) ==> '52' thats nonnexpected but dosent error out 
+
+--> we can use conditions to check data types but with ts we can write it in better snd less lines in more STATIC PROG LANG APPROACh
+
+
+
+What does typescript add to javascript?Explain each of them in your own words. Research on google if you are confused.
+
+--> typescrypt is super set of js , means everything of js + extra feature = > typescript
+
+--> 1) Static types --> ex we have number as data type on js that is automaticlly assigned but if we have input like age we can use more basic data type like byte that will save memory on runtime as well as space . 
+
+       		TS provies us power to write JS in Static prog lang Way 
+
+	 2) Compile time checks – JavaScript is an interpreted programming language. There is no compilation involved. Hence, the errors get caught during the runtime. Since TypeScript compiles into JavaScript, errors get reported during the compile time rather than the runtime
+
+	3)Object-Oriented Programming :-  it has support of class , inheritance ,generics , etc 
+
+	4) function overloading is supported 
+
+	5) errors can be found on compile time as TS is compilled in js later 
+
+	6) Less Bugs , less lines and more optimized 
+
+	7) support modules --> a collection of  classes 
+
+						module Company {
+
+  								class Employee {
+
+  											}
+
+  								class EmployeeHelper {
+
+ 										 targetEmployee: Employee;
+
+ 										 }
+
+  								export class Customer {
+
+  												}
+
+							}
+
+				var obj = new Company.Customer();
+
+
+
+
+
+Why do we need typescript compiler?
+
+--> browser dont understand TS , it just understand 3 things : HTML , CSS , JS 
+
+--> think of compiler as converter that convert TS code into JS and if error happen gives error during compilation 
+
+--> Due to this extra process we will have lot less bugs during runtime 
+
+
+
+
+
+What happens when you compile?
+
+--> TS code will be converted into Js and saved into JS file with same name
+
+--> During compilation from top to bottom approach it will check for error
+
+ and if errro happens compilation will stop at that point
+
+
+
+
+
+What are the different types available in typescript?
+number ,arrays , onject , boolian , strings , Array of definite size like java 
+
+
+
+
+
+Why does add('1', '2') start showing error when the trainer has defined types?
+because in app.ts we have assigned data type number to params of function add so during compilation when we pass string it gives error 
+
+
+
+
+
+
+
+ 	
+
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
