@@ -11,9 +11,13 @@
 > we can use conditions to check data types but with ts we can write it in better snd less lines in more STATIC PROG LANG APPROACh
 
 > TS uses strict checks for data type like in static prog lang like c++ or java
+
 > we never use ts code directly
+
 > TS code is compilled into JS code and then we use that JS code
+
 > If we wrote loose code like in exapmle TS will give error during compilation and force us Devs to write clean code .
+
 > IT helps us to reduce runtime bugs
 
 ---
@@ -60,7 +64,9 @@
 ## Why do we need typescript compiler?
 
 > browser dont understand TS , it just understand 3 things : HTML , CSS , JS
+
 > think of compiler as converter that convert TS code into JS and if error happen gives error during compilation
+
 > Due to this extra process we will have lot less bugs during runtime
 
 ---
@@ -68,6 +74,7 @@
 ## What happens when you compile?
 
 > TS code will be converted into Js and saved into JS file with same name
+
 > During compilation from top to bottom approach it will check for error and if error happens compilation will stop at that point
 
 ---
@@ -87,7 +94,9 @@
 ## What do you mean typescript can infer the types? What is the advantage of this?
 
 > TS can pre determine type of variables based on value & if not or its has more than one possible value then we need to pass types to it .
-> Infer types are types that we dont define or assign to variable but TS assign it based on varible value  
+
+> Infer types are types that we dont define or assign to variable but TS assign it based on varible value
+
 > Infer type can be anything : array , string or maybe html element
 
         let x = [0, 1, null];
@@ -122,6 +131,7 @@
 ## What does tsc init do?
 
 > initialize tsconfig.json
+
 > by modifying settings in config file we can modify TS compiler behivaour
 
 ---
@@ -129,6 +139,7 @@
 ## What does strict mode do?
 
 > checks for null and strict type checks
+
 > ex-> if html ele is null event cannot be added on it therefore it will throw error
 
 ---
@@ -150,7 +161,9 @@
 ## Why shouldnt we use any type?
 
 > any is data type in TS that allows any knid of value
+
 > only use any when we dont know what kind of value a variable should have or we want it to have any kind of value
+
 > never liave params in functions vithout data type at least assign any to avoid Error in TS
 
 ---
@@ -191,3 +204,113 @@
 ---
 
 ## What does type keyword do?
+
+> ITS USED TO CREATE OUR OWN TYPE
+
+        ----------
+        syntax
+        ----------
+
+        type numOrStr = number | string;
+
+        type Result = { val: number; timestamp: Date };
+
+---
+
+## Interface are more frequently used than types. What do you think is the advantage of interfaces?
+
+> READ ON [Types vs. interfaces in TypeScript](https://blog.logrocket.com/types-vs-interfaces-in-typescript/#:~:text=In%20TypeScript%2C%20we%20can%20easily,also%20create%20classes%20implementing%20interfaces)
+
+    Let’s imagine that we have two interfaces called Song, with different properties:
+
+    interface Song {
+        artistName: string;
+    };
+
+    interface Song {
+        songName: string;
+    };
+
+    const song: Song = {
+        artistName: "Freddie",
+        songName: "The Chain"
+    };
+
+    TypeScript will automatically merge both interfaces declarations into one, so when we use this Song interface, we’ll have both properties.
+
+    Declaration merging does not work with types. If we try to create two types with the same names, but with different properties, TypeScript would still throw us an error.
+
+    ______
+
+>
+
+    Interfaces are better when you need to define a new object or method of an object. For example, in React applications, when you need to define the props that a specific component is going to receive, it’s ideal to use interface over types
+
+>
+
+    interface TodoProps {
+        name: string;
+        isCompleted: boolean
+    };
+
+    const Todo: React.FC<TodoProps> = ({ name, isCompleted }) => {
+        ...
+    };
+
+>
+
+    Types are better when you need to create functions, for example. Let’s imagine that we have a function that’s going to return an object called, type alias is more recommended for this approach:
+
+        type Person = {
+            name: string,
+            age: number
+        };
+
+        type ReturnPerson = (
+                person: Person
+        ) => Person;
+
+        const returnPerson: ReturnPerson = (person) => {
+                return person;
+        };
+
+---
+
+## How is an array a generic as per the trainer?
+
+> WHAT IS GENERICS :
+
+    data type that is made up o combination of other data type elements
+
+    now synntax :-->
+             let numResults: number[] = [];
+    can also be written as
+        let numResults: Array<number> = []; // generics
+
+---
+
+## Why do we need to change the target to es6?
+
+> many new feature of js are introduced in es6 (2015) .
+
+> promise doesnot support in version before es6.
+
+> we canchange it in config file
+
+> latest TS uses es7 i.e ecma2016 by default
+
+## How does generics work with promises.
+
+        // generics with promise
+
+            const myPromise = new Promise<string>((res, rej) => {
+            setTimeout(() => {
+                res("hello TS 😀");
+            }, 1000);
+            });
+
+            myPromise.then((result) => {
+            console.log(result.split(" "));
+            });
+
+

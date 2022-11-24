@@ -2,7 +2,6 @@
 var num1Ele = document.getElementById("num1");
 var num2Ele = document.getElementById("num2");
 var btnEle = document.querySelector("button");
-// vale can therotically be null but TS WONT ALLOW NULL therefore ! is used to fore it
 function add(a, b) {
     if (typeof a === "number" && typeof b === "number")
         return a + b;
@@ -10,7 +9,7 @@ function add(a, b) {
         return a + " " + b;
     return +a + +b;
 }
-let numResults = [];
+let numResults = []; // generics
 let textResults = [];
 function printResults(resultObj) {
     console.log(resultObj.val);
@@ -25,4 +24,13 @@ btnEle.addEventListener("click", () => {
     // console.log(result);
     console.log(numResults, textResults);
     printResults({ val: result, timestamp: new Date() });
+});
+// generics with promise
+const myPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res("hello TS 😀");
+    }, 1000);
+});
+myPromise.then((result) => {
+    console.log(result.split(" "));
 });
